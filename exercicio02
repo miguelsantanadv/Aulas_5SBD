@@ -13,9 +13,9 @@ INNER JOIN emprestimo emp on cl.cliente_cod = emp.cliente_cliente_cod;
 
 --3. Mostrar todos os clientes que moram em Niterói. 
 
-SELECT cl.cliente_cod, cl.cliente_nome, cl.rua, cl.cidade
-FROM cliente cl
-WHERE cl.cidade = 'Niterói'; 
+SELECT cliente_cod, cliente_nome, rua, cidade
+FROM cliente
+WHERE cidade = 'Niterói'; 
 
 --4. Encontre os nomes e cidades de clientes que possuam empréstimos em alguma agência
 
