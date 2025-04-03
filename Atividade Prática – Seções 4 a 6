@@ -6,19 +6,39 @@ Base de dados utilizada: Sistema bancário com tabelas agencia, cliente, conta, 
 
 Parte 1 – Funções de Caracteres, Números e Datas (Seção 4)
 1. Exiba os nomes dos clientes com todas as letras em maiúsculas.
+SELECT UPPER(CLIENTE_NOME) AS NOME
+FROM CLIENTE;
 
 2. Exiba os nomes dos clientes formatados com apenas a primeira letra maiúscula.
+SELECT INITCAP(CLIENTE_NOME) AS NOME
+FROM CLIENTE;
 
 3. Mostre as três primeiras letras do nome de cada cliente.
 SELECT SUBSTR(CLIENTE_NOME,1,3) FROM CLIENTE;
 
 4. Exiba o número de caracteres do nome de cada cliente.
+SELECT LENGTH(CLIENTE_NOME)
+FROM CLIENTE;
 
 5. Apresente o saldo de todas as contas, arredondado para o inteiro mais próximo.
+SELECT ROUND (SALDO,0)
+FROM CONTA;
+
 6. Exiba o saldo truncado, sem casas decimais.
+SELECT TRUNC(SALDO) AS SALDO
+FROM CONTA;
+
 7. Mostre o resto da divisão do saldo da conta por 1000.
+SELECT MOD(SALDO,1000) AS SALDO
+FROM CONTA;
+
 8. Exiba a data atual do servidor do banco.
+SELECT SYSDATE FROM DUAL;
+
 9. Adicione 30 dias à data atual e exiba como "Data de vencimento simulada".
+SELECT TO_CHAR(SYSDATE + 30, 'DD/MM/YYYY') AS "Data de vencimento simulada"
+FROM DUAL;
+
 10.Exiba o número de dias entre a data de abertura da conta e a data atual.
 
 Parte 2 – Conversão de Dados e Tratamento de Nulos (Seção 5)
