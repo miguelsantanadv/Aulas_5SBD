@@ -6,9 +6,14 @@ Base de dados utilizada: Sistema bancário com tabelas agencia, cliente, conta, 
 
 Parte 1 – Funções de Caracteres, Números e Datas (Seção 4)
 1. Exiba os nomes dos clientes com todas as letras em maiúsculas.
+
 2. Exiba os nomes dos clientes formatados com apenas a primeira letra maiúscula.
+
 3. Mostre as três primeiras letras do nome de cada cliente.
+SELECT SUBSTR(CLIENTE_NOME,1,3) FROM CLIENTE;
+
 4. Exiba o número de caracteres do nome de cada cliente.
+
 5. Apresente o saldo de todas as contas, arredondado para o inteiro mais próximo.
 6. Exiba o saldo truncado, sem casas decimais.
 7. Mostre o resto da divisão do saldo da conta por 1000.
