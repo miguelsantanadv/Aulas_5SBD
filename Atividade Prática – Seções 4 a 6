@@ -43,16 +43,45 @@ FROM DUAL;
 
 Parte 2 – Conversão de Dados e Tratamento de Nulos (Seção 5)
 11.Apresente o saldo de cada conta formatado como moeda local.
+
 12. Converta a data de abertura da conta para o formato 'dd/mm/yyyy'.
+SELECT TO_CHAR(DATA_ABERTURA, 'DD/MM/YYYY') AS "Data de vencimento simulada"
+FROM DUAL;
+
 13.Exiba o saldo da conta e substitua valores nulos por 0.
+SELECT NVL(SALDO,0) AS SALDO
+FROM CONTA
+
 14.Exiba os nomes dos clientes e substitua valores nulos na cidade por 'Sem cidade'.
+SELECT CLIENTE_NOME, NVL(RUA, 'Sem Rua') AS RUA, NVL(CIDADE, 'Sem Cidade') AS CIDADE
+FROM CLIENTE
+
 15. Classifique os clientes em grupos com base em sua cidade:
 o 'Região Metropolitana' se forem de Niterói
 o 'Interior' se forem de Resende
 o 'Outra Região' para as demais cidades
+SELECT CLIENTE_NOME,
+CASE CIDADE
+    WHEN 'Niterói' THEN 'Região Metropolitana'
+    WHEN 'Resende' THEN 'Interior'
+    ELSE 'Outra Região'
+END AS REGIÃO
+FROM CLIENTE
 
 Parte 3 – Junções entre Tabelas (Seção 6)
 16.Exiba o nome de cada cliente, o número da conta e o saldo correspondente.
+SELECT CLIENTE_NOME, CONTA_NUMERO, SALDO
+FROM CLIENTE 
+JOIN CONTA ON CLIENTE_COD = CLIENTE_CLIENTE_COD;
+
 17. Liste os nomes dos clientes e os nomes das agências onde mantêm conta.
+SELECT CLIENTE_NOME, AGENCIA_NOME
+FROM CONTA
+JOIN CLIENTE ON CLIENTE_COD = CLIENTE_CLIENTE_COD
+JOIN AGENCIA ON AGENCIA_COD = AGENCIA_AGENCIA_COD
+
 18. Mostre todas as agências, mesmo aquelas que não possuem clientes vinculados (junção
 externa esquerda).
+SELECT DISTINCT AGENCIA_NOME
+FROM AGENCIA
+LEFT JOIN CONTA ON AGENCIA_AGENCIA_COD = AGENCIA_COD;
