@@ -55,15 +55,54 @@ Base de dados utilizada: Sistema bancário (agencia, cliente, conta, emprestimo)
 Parte 1 – Subconsultas de Linha Única
 1. Liste os nomes dos clientes cujas contas possuem saldo acima da média geral de todas as
 contas registradas.
+SELECT CLIENTE_NOME
+FROM CLIENTE
+JOIN CONTA ON SALDO > 
+    (SELECT AVG(SALDO)
+    FROM CONTA)
+AND CLIENTE_COD = CLIENTE_CLIENTE_COD;
+
 2. Exiba os nomes dos clientes cujos saldos são iguais ao maior saldo encontrado no banco.
+SELECT CLIENTE_NOME
+FROM CLIENTE
+JOIN CONTA ON SALDO = 
+    (SELECT MAX(SALDO)
+    FROM CONTA)
+AND CLIENTE_COD = CLIENTE_CLIENTE_COD;
+
+
 3. Liste as cidades onde a quantidade de clientes é maior que a quantidade média de clientes
 por cidade.
 
+
 Parte 2 – Subconsultas Multilinha
 4. Liste os nomes dos clientes com saldo igual a qualquer um dos dez maiores saldos registrados.
+
 5. Liste os clientes que possuem saldo menor que todos os saldos dos clientes da cidade de
 Niterói.
+SELECT CLIENTE_NOME
+FROM CLIENTE
+JOIN CONTA ON SALDO <
+    (SELECT MIN(SALDO)
+    FROM CONTA
+    JOIN AGENCIA ON AGENCIA_AGENCIA_COD = AGENCIA_COD AND AGENCIA_CIDADE IN('Niterói')
+    )
+AND CLIENTE_COD = CLIENTE_CLIENTE_COD;
+
 6. Liste os clientes cujos saldos estão entre os saldos de clientes de Volta Redonda.
+SELECT CLIENTE_NOME
+FROM CLIENTE
+JOIN CONTA ON SALDO BETWEEN 
+    (SELECT MIN(SALDO)
+    FROM CONTA
+    JOIN AGENCIA ON AGENCIA_AGENCIA_COD = AGENCIA_COD AND AGENCIA_CIDADE IN('Volta Redonda')
+    )
+    AND
+    (SELECT MAX(SALDO)
+    FROM CONTA
+    JOIN AGENCIA ON AGENCIA_AGENCIA_COD = AGENCIA_COD AND AGENCIA_CIDADE IN('Volta Redonda')
+    )
+AND CLIENTE_COD = CLIENTE_CLIENTE_COD;
 
 Parte 3 – Subconsultas Correlacionadas
 7. Exiba os nomes dos clientes cujos saldos são maiores que a média de saldo das contas da
