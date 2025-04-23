@@ -25,8 +25,10 @@ INNER JOIN AGENCIA a ON ct.AGENCIA_AGENCIA_COD = a.AGENCIA_COD;
 
 Parte 2 – Funções de Grupo, COUNT, DISTINCT e NVL (Seção 8)
 4. Exiba o saldo total de todas as contas cadastradas.
+SELECT SUM(SALDO) AS SALDO_TOTAL FROM CONTA
 
 5. Mostre o maior saldo e a média de saldo entre todas as contas.
+SELECT MAX(SALDO) AS MAIOR_SALDO, AVG(SALDO) AS MEDIA FROM CONTA
 
 6. Apresente a quantidade total de contas cadastradas.
 SELECT COUNT(CONTA_NUMERO)
@@ -37,13 +39,30 @@ SELECT COUNT(DISTINCT CIDADE)
 FROM CLIENTE;
 
 8. Exiba o número da conta e o saldo, substituindo valores nulos por zero.
+SELECT NVL(CONTA_NUMERO, 0), NVL(SALDO, 0) FROM CONTA
 
 Parte 3 – GROUP BY, HAVING, ROLLUP e Operadores de Conjunto (Seção 9)
 9. Exiba a média de saldo por cidade dos clientes.
+SELECT CIDADE, AVG(SALDO) FROM CONTA
+JOIN CLIENTE ON CLIENTE_CLIENTE_COD = CLIENTE_COD
+GROUP BY CIDADE
+
 10. Liste apenas as cidades com mais de 3 contas associadas a seus moradores.
+SELECT CIDADE FROM CONTA
+JOIN CLIENTE ON CLIENTE_CLIENTE_COD = CLIENTE_COD
+GROUP BY CIDADE
+HAVING COUNT(CIDADE) > 3
+
 11.Utilize a cláusula ROLLUP para exibir o total de saldos por cidade da agência e o total geral.
+SELECT SUM(SALDO), AGENCIA_CIDADE FROM CONTA
+JOIN AGENCIA ON AGENCIA_AGENCIA_COD = AGENCIA_COD
+GROUP BY ROLLUP (AGENCIA_CIDADE)
+
 12. Faça uma consulta com UNION que combine os nomes de cidades dos clientes e das
 agências, sem repetições.
+SELECT CIDADE FROM CLIENTE
+UNION ALL
+SELECT AGENCIA_CIDADE FROM AGENCIA
 
 Atividade Prática – SQL com Oracle APEX
 Seção 10 – Subconsultas
